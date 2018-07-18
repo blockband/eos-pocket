@@ -1,6 +1,9 @@
 # eos-pocket
 
-> My fantastic Vue project
+## install dependencies
+```
+$ npm install
+```
 
 ## Commands
 
