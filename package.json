@@ -16,6 +16,7 @@
     "email": "kai.1001@kakaocorp.com"
   },
   "dependencies": {
+    "eosjs": "^15.0.6",
     "normalize.css": "^7.0.0",
     "object-assign": "^4.1.1",
     "promise-polyfill": "^6.0.2"
