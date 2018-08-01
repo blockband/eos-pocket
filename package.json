@@ -1,6 +1,7 @@
 {
   "name": "derek-eos",
   "version": "0.1.0",
+  "homepage": "https://blockband.github.io/eos-pocket",
   "private": true,
   "dependencies": {
     "eosjs": "^16.0.0",
