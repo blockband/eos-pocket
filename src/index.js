@@ -1,6 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-import App from './App';
+import { Provider } from 'mobx-react'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import App from './App'
+
+import eosioStore from 'stores/eosioStore'
+
+const stores = {
+  eosioStore
+}
+
+ReactDOM.render(
+  <Provider {...stores}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+)
