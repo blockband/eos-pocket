@@ -11,4 +11,4 @@ class EosAgent {
   }
 }
 
-export default new EosAgent()
+export default EosAgent

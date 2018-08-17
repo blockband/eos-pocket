@@ -20,21 +20,19 @@ import {
 import Page from 'components/Page'
 
 class HomePage extends Component {
-  constructor(props) {
-    super(props)
-    const { eosioStore } = this.props
-    this.eosioStore = eosioStore
-  }
   componentDidMount = async () => {
-    this.eosioStore.getInfo()
+    const { stores } = this.props
+    stores.getInfo()
   }
 
   render() {
+    const { stores } = this.props
+
     return (
       <Page>
         <Row>
-          {!this.eosioStore.info && <Col>Now Loading...</Col>}
-          {this.eosioStore.info && <Col>{JSON.stringify(this.eosioStore.info)}</Col>}
+          {!stores.info && <Col>Now Loading...</Col>}
+          {stores.info && <Col>{JSON.stringify(stores.info)}</Col>}
         </Row>
       </Page>
     )
@@ -42,6 +40,6 @@ class HomePage extends Component {
 }
 
 export default compose(
-  inject('eosioStore'),
+  inject('stores'),
   observer
 )(HomePage)
