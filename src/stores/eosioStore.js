@@ -25,4 +25,4 @@ decorate(EosioStore, {
     increase: action
 })
   
-export default new EosioStore()
+export default EosioStore
