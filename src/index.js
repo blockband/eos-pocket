@@ -5,14 +5,12 @@ import { Provider } from 'mobx-react'
 
 import App from './App'
 
-import eosioStore from 'stores/eosioStore'
+import EosioStore from 'stores/EosioStore'
 
-const stores = {
-  eosioStore
-}
+const stores = new EosioStore()
 
 ReactDOM.render(
-  <Provider {...stores}>
+  <Provider stores={stores}>
     <App />
   </Provider>,
   document.getElementById('root')
