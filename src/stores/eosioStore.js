@@ -5,7 +5,7 @@ const eosAgent = new EosAgent()
 
 class EosioStore {
     info = null;
-    count = 0;
+    ramInfo = null;
 
     getInfo = async () => {
         try {
@@ -15,16 +15,20 @@ class EosioStore {
         } catch (e) {}
     }
 
-    increase = () => {
-        this.count++;
+    getRamMarket = async () => {
+        try {
+          const ramInfo = await eosAgent.getRamMarket()
+    
+          this.ramInfo = ramInfo
+        } catch (e) {}
     }
 }
 
 decorate(EosioStore, {
     info: observable,
-    count: observable,
+    ramInfo: observable,
     getInfo: action,
-    increase: action
+    getRamMarket: action
 })
   
 export default EosioStore

@@ -9,6 +9,18 @@ class EosAgent {
     getInfo = () => {
         return this.eos.getInfo({})
     }
+
+    getRamMarket = () => {
+        return this.eos.getTableRows(
+            {
+                "json": true,
+                "scope": 'eosio',
+                "code": 'eosio',
+                "table": "rammarket",
+              }
+        )
+    }
+
 }
 
 export default EosAgent

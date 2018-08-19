@@ -14,14 +14,17 @@ class Home extends Component {
             GetInfo
           </button>
           <button
-            onClick={stores.increase}>
-            +
+            onClick={stores.getRamMarket}>
+            GetRamInfo
           </button>
           <div>
-            {!stores.info && <span>Now Loading...</span>}
+            {!stores.info && <span>Info. Now Loading...</span>}
             {stores.info && <span>{JSON.stringify(stores.info)}</span>}
           </div>
-          <div>{ stores.count }</div>
+          <div>
+            {!stores.ramInfo && <span>RamInfo. Now Loading...</span>}
+            {stores.ramInfo && <span>{JSON.stringify(stores.ramInfo)}</span>}
+          </div>
       </div>
     );
   }
