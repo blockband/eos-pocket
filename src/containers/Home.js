@@ -5,7 +5,6 @@ import { compose } from 'recompose'
 class Home extends Component {
   render() {
     const { stores } = this.props;
-    console.log(stores)
 
     return (
       <div>
@@ -24,6 +23,9 @@ class Home extends Component {
           <div>
             {!stores.ramInfo && <span>RamInfo. Now Loading...</span>}
             {stores.ramInfo && <span>{JSON.stringify(stores.ramInfo)}</span>}
+          </div>
+          <div>
+            {stores.getRamPriceEosPerKB()} EOS/KB
           </div>
       </div>
     );
