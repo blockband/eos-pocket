@@ -5,7 +5,7 @@ import { Provider } from 'mobx-react'
 
 import App from './App'
 
-import EosioStore from 'stores/EosioStore'
+import EosioStore from 'stores/eosioStore'
 
 const stores = new EosioStore()
 
