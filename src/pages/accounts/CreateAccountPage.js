@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react"
+import React, { Component, Fragment } from 'react'
 import {
   Row,
   Col,
@@ -11,9 +11,9 @@ import {
   FormGroup,
   Label,
   Input
-} from "reactstrap"
+} from 'reactstrap'
 
-import Page from "components/Page"
+import Page from 'components/Page'
 
 class CreateAccountPage extends Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class CreateAccountPage extends Component {
       <Page
         className="ButtonPage"
         title="Create Account"
-        breadcrumbs={[{ name: "Accounts", active: true }]}
+        breadcrumbs={[{ name: 'Account', active: true }]}
       >
         <Row>
           <Col xs="12">

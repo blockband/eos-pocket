@@ -1,10 +1,13 @@
 import { STATE_LOGIN, STATE_SIGNUP } from 'components/AuthForm'
 import GAListener from 'components/GAListener'
 import { EmptyLayout, LayoutRoute, MainLayout } from 'components/Layout'
+
 import CreateAccountPage from 'pages/accounts/CreateAccountPage'
 import StakePage from 'pages/accounts/StakePage'
 import RammarketPage from 'pages/accounts/RammarketPage'
 import RefundPage from 'pages/accounts/RefundPage'
+
+import TransferPage from 'pages/TransferPage'
 
 import AlertPage from 'pages/AlertPage'
 import AuthModalPage from 'pages/AuthModalPage'
@@ -41,13 +44,39 @@ class App extends React.Component {
       <BrowserRouter basename={getBasename()}>
         <GAListener>
           <Switch>
-            <LayoutRoute exact path="/accounts/creates" layout={MainLayout} component={CreateAccountPage} />
+            <LayoutRoute exact path="/transfers" layout={MainLayout} component={TransferPage} />
+            <LayoutRoute
+              exact
+              path="/accounts/creates"
+              layout={MainLayout}
+              component={CreateAccountPage}
+            />
             <LayoutRoute exact path="/accounts/stakes" layout={MainLayout} component={StakePage} />
-            <LayoutRoute exact path="/accounts/rammarkets" layout={MainLayout} component={RammarketPage} />
-            <LayoutRoute exact path="/accounts/refunds" layout={MainLayout} component={RefundPage} />
+            <LayoutRoute
+              exact
+              path="/accounts/rammarkets"
+              layout={MainLayout}
+              component={RammarketPage}
+            />
+            <LayoutRoute
+              exact
+              path="/accounts/refunds"
+              layout={MainLayout}
+              component={RefundPage}
+            />
 
-            <LayoutRoute exact path="/login" layout={EmptyLayout} component={props => <AuthPage {...props} authState={STATE_LOGIN} />} />
-            <LayoutRoute exact path="/signup" layout={EmptyLayout} component={props => <AuthPage {...props} authState={STATE_SIGNUP} />} />
+            <LayoutRoute
+              exact
+              path="/login"
+              layout={EmptyLayout}
+              component={props => <AuthPage {...props} authState={STATE_LOGIN} />}
+            />
+            <LayoutRoute
+              exact
+              path="/signup"
+              layout={EmptyLayout}
+              component={props => <AuthPage {...props} authState={STATE_SIGNUP} />}
+            />
             <LayoutRoute exact path="/login-modal" layout={MainLayout} component={AuthModalPage} />
             <LayoutRoute exact path="/" layout={MainLayout} component={HomePage} />
             <LayoutRoute exact path="/buttons" layout={MainLayout} component={ButtonPage} />
@@ -57,12 +86,22 @@ class App extends React.Component {
             <LayoutRoute exact path="/alerts" layout={MainLayout} component={AlertPage} />
             <LayoutRoute exact path="/tables" layout={MainLayout} component={TablePage} />
             <LayoutRoute exact path="/badges" layout={MainLayout} component={BadgePage} />
-            <LayoutRoute exact path="/button-groups" layout={MainLayout} component={ButtonGroupPage} />
+            <LayoutRoute
+              exact
+              path="/button-groups"
+              layout={MainLayout}
+              component={ButtonGroupPage}
+            />
             <LayoutRoute exact path="/dropdowns" layout={MainLayout} component={DropdownPage} />
             <LayoutRoute exact path="/progress" layout={MainLayout} component={ProgressPage} />
             <LayoutRoute exact path="/modals" layout={MainLayout} component={ModalPage} />
             <LayoutRoute exact path="/forms" layout={MainLayout} component={FormPage} />
-            <LayoutRoute exact path="/input-groups" layout={MainLayout} component={InputGroupPage} />
+            <LayoutRoute
+              exact
+              path="/input-groups"
+              layout={MainLayout}
+              component={InputGroupPage}
+            />
             <LayoutRoute exact path="/charts" layout={MainLayout} component={ChartPage} />
             <LayoutRoute exact path="/register" layout={MainLayout} component={AuthPage} />
             <Redirect to="/" />
