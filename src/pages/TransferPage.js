@@ -1,17 +1,5 @@
-import React, { Component, Fragment } from 'react'
-import {
-  Row,
-  Col,
-  Card,
-  CardHeader,
-  CardBody,
-  Badge,
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input
-} from 'reactstrap'
+import React, { Component } from 'react'
+import { Row, Col, Card, CardHeader, CardBody, Button, Form, FormGroup, Label, Input } from 'reactstrap'
 
 import Page from 'components/Page'
 
@@ -22,11 +10,7 @@ class TransferPage extends Component {
 
   render() {
     return (
-      <Page
-        className="ButtonPage"
-        title="Transfer"
-        breadcrumbs={[{ name: 'Transfer', active: true }]}
-      >
+      <Page className="ButtonPage" title="Transfer" breadcrumbs={[{ name: 'Transfer', active: true }]}>
         <Row>
           <Col xs="12">
             <Card className="mb-3">
@@ -56,11 +40,7 @@ class TransferPage extends Component {
                       Receive Account Name
                     </Label>
                     <Col sm={10}>
-                      <Input
-                        type="text"
-                        name="receiveAccount"
-                        placeholder="Receive account is required."
-                      />
+                      <Input type="text" name="receiveAccount" placeholder="Receive account is required." />
                     </Col>
                   </FormGroup>
                   <FormGroup row>
