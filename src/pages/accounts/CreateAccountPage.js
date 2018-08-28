@@ -1,17 +1,8 @@
 import React, { Component, Fragment } from 'react'
-import {
-  Row,
-  Col,
-  Card,
-  CardHeader,
-  CardBody,
-  Badge,
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input
-} from 'reactstrap'
+import { inject, observer } from 'mobx-react'
+import { compose } from 'recompose'
+
+import { Row, Col, Card, CardHeader, CardBody, Badge, Button, Form, FormGroup, Label, Input } from 'reactstrap'
 
 import Page from 'components/Page'
 
@@ -22,11 +13,7 @@ class CreateAccountPage extends Component {
 
   render() {
     return (
-      <Page
-        className="ButtonPage"
-        title="Create Account"
-        breadcrumbs={[{ name: 'Account', active: true }]}
-      >
+      <Page className="ButtonPage" title="Create Account" breadcrumbs={[{ name: 'Account', active: true }]}>
         <Row>
           <Col xs="12">
             <Card className="mb-3">
@@ -54,11 +41,7 @@ class CreateAccountPage extends Component {
                       Owner Public Key
                     </Label>
                     <Col sm={10}>
-                      <Input
-                        type="text"
-                        name="ownerKey"
-                        placeholder="Owner public key is required."
-                      />
+                      <Input type="text" name="ownerKey" placeholder="Owner public key is required." />
                     </Col>
                   </FormGroup>
                   <FormGroup row>
@@ -66,11 +49,7 @@ class CreateAccountPage extends Component {
                       Active Public Key
                     </Label>
                     <Col sm={10}>
-                      <Input
-                        type="text"
-                        name="activeKey"
-                        placeholder="Active public key is required."
-                      />
+                      <Input type="text" name="activeKey" placeholder="Active public key is required." />
                     </Col>
                   </FormGroup>
                   <FormGroup row>
@@ -78,12 +57,7 @@ class CreateAccountPage extends Component {
                       Cpu Stake(in EOS)
                     </Label>
                     <Col sm={10}>
-                      <Input
-                        type="text"
-                        name="cpuStake"
-                        value="0.1"
-                        placeholder="CPU stake in EOS."
-                      />
+                      <Input type="text" name="cpuStake" value="0.1" placeholder="CPU stake in EOS." />
                     </Col>
                   </FormGroup>
                   <FormGroup row>
@@ -91,12 +65,7 @@ class CreateAccountPage extends Component {
                       Net Stake(in EOS)
                     </Label>
                     <Col sm={10}>
-                      <Input
-                        type="text"
-                        name="netStake"
-                        value="0.1"
-                        placeholder="NET stake in EOS."
-                      />
+                      <Input type="text" name="netStake" value="0.1" placeholder="NET stake in EOS." />
                     </Col>
                   </FormGroup>
                   <FormGroup row>
@@ -104,12 +73,7 @@ class CreateAccountPage extends Component {
                       Ram Buy(in bytes)
                     </Label>
                     <Col sm={10}>
-                      <Input
-                        type="text"
-                        name="ramBytes"
-                        value="4096"
-                        placeholder="Ram buy in bytes"
-                      />
+                      <Input type="text" name="ramBytes" value="4096" placeholder="Ram buy in bytes" />
                     </Col>
                   </FormGroup>
                 </Form>
@@ -127,4 +91,7 @@ class CreateAccountPage extends Component {
   }
 }
 
-export default CreateAccountPage
+export default compose(
+  inject('eosioStore'),
+  observer
+)(CreateAccountPage)

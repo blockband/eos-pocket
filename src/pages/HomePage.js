@@ -2,37 +2,24 @@ import React, { Component, Fragment } from 'react'
 import { inject, observer } from 'mobx-react'
 import { compose } from 'recompose'
 
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  CardTitle,
-  CardGroup,
-  CardDeck,
-  Row,
-  Col,
-  ListGroup,
-  ListGroupItem,
-  Badge,
-  Button
-} from 'reactstrap'
+import { Card, CardBody, CardHeader, CardTitle, CardGroup, CardDeck, Row, Col, ListGroup, ListGroupItem, Badge, Button } from 'reactstrap'
 
 import Page from 'components/Page'
 
 class HomePage extends Component {
   componentDidMount = async () => {
-    const { stores } = this.props
-    stores.getInfo()
+    const { eosioStore } = this.props
+    eosioStore.getInfo()
   }
 
   render() {
-    const { stores } = this.props
+    const { eosioStore } = this.props
 
     return (
       <Page>
         <Row>
-          {!stores.info && <Col>Now Loading...</Col>}
-          {stores.info && <Col>{JSON.stringify(stores.info)}</Col>}
+          {!eosioStore.info && <Col>Now Loading...</Col>}
+          {eosioStore.info && <Col>{JSON.stringify(eosioStore.info)}</Col>}
         </Row>
       </Page>
     )
@@ -40,6 +27,6 @@ class HomePage extends Component {
 }
 
 export default compose(
-  inject('stores'),
+  inject('eosioStore'),
   observer
 )(HomePage)

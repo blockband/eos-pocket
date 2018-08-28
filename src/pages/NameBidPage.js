@@ -9,7 +9,53 @@ class NameBidPage extends Component {
   }
 
   render() {
-    return <Page className="ButtonPage" title="Name bid" breadcrumbs={[{ name: 'Name bid', active: true }]} />
+    return (
+      <Page className="ButtonPage" title="Name bid" breadcrumbs={[{ name: 'Name bid', active: true }]}>
+        <Row>
+          <Col xs="12">
+            <Card className="mb-3">
+              <CardHeader>Available EOS</CardHeader>
+              <CardBody className="text-center">0.1454 EOS</CardBody>
+            </Card>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs="12">
+            <Card className="mb-3">
+              <CardHeader>Bid for Premium account name</CardHeader>
+              <CardBody>
+                <Form>
+                  <FormGroup row>
+                    <Label for="accountName" sm={2}>
+                      Premium Account Name
+                    </Label>
+                    <Col sm={10}>
+                      <Input type="text" name="accountName" placeholder="12 characters, a-z, 1-5" />
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="cpuStake" sm={2}>
+                      Bid(in EOS)
+                    </Label>
+                    <Col sm={10}>
+                      <Input type="text" name="cpuStake" value="0.1" placeholder="Bid in EOS." />
+                    </Col>
+                  </FormGroup>
+                </Form>
+              </CardBody>
+              <CardBody className="text-center">
+                <Button color="primary" size="sm">
+                  Submit bid
+                </Button>
+                <Button color="primary" size="sm">
+                  Get bid Prices
+                </Button>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+      </Page>
+    )
   }
 }
 

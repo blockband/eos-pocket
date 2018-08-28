@@ -7,10 +7,14 @@ import App from './App'
 
 import EosioStore from 'stores/eosioStore'
 
-const stores = new EosioStore()
+const eosioStore = new EosioStore()
+
+const stores = {
+  eosioStore
+}
 
 ReactDOM.render(
-  <Provider stores={stores}>
+  <Provider {...stores}>
     <App />
   </Provider>,
   document.getElementById('root')

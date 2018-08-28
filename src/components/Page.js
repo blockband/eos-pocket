@@ -1,23 +1,16 @@
-import React from 'react';
-import PropTypes from 'utils/propTypes';
+import React from 'react'
+import PropTypes from 'utils/propTypes'
 
-import bn from 'utils/bemnames';
+import bn from 'utils/bemnames'
 
-import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem } from 'reactstrap'
 
-import Typography from './Typography';
+import Typography from './Typography'
 
-const bem = bn.create('page');
+const bem = bn.create('page')
 
-const Page = ({
-  title,
-  breadcrumbs,
-  tag: Tag,
-  className,
-  children,
-  ...restProps
-}) => {
-  const classes = bem.b('px-3', className);
+const Page = ({ title, breadcrumbs, tag: Tag, className, children, ...restProps }) => {
+  const classes = bem.b('px-3', className)
 
   return (
     <Tag className={classes} {...restProps}>
@@ -27,8 +20,8 @@ const Page = ({
             {title}
           </Typography>
         ) : (
-            title
-          )}
+          title
+        )}
         {breadcrumbs && (
           <Breadcrumb className={bem.e('breadcrumb')}>
             <BreadcrumbItem>Home</BreadcrumbItem>
@@ -43,8 +36,8 @@ const Page = ({
       </div>
       {children}
     </Tag>
-  );
-};
+  )
+}
 
 Page.propTypes = {
   tag: PropTypes.component,
@@ -54,14 +47,14 @@ Page.propTypes = {
   breadcrumbs: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
-      active: PropTypes.bool,
+      active: PropTypes.bool
     })
-  ),
-};
+  )
+}
 
 Page.defaultProps = {
   tag: 'div',
-  title: '',
-};
+  title: ''
+}
 
-export default Page;
+export default Page

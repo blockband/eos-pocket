@@ -2,14 +2,6 @@ import { STATE_LOGIN, STATE_SIGNUP } from 'components/AuthForm'
 import GAListener from 'components/GAListener'
 import { EmptyLayout, LayoutRoute, MainLayout } from 'components/Layout'
 
-import CreateAccountPage from 'pages/accounts/CreateAccountPage'
-import StakePage from 'pages/accounts/StakePage'
-import RammarketPage from 'pages/accounts/RammarketPage'
-import RefundPage from 'pages/accounts/RefundPage'
-
-import TransferPage from 'pages/TransferPage'
-import NameBidPage from 'pages/NameBidPage'
-
 import AlertPage from 'pages/AlertPage'
 import AuthModalPage from 'pages/AuthModalPage'
 import AuthPage from 'pages/AuthPage'
@@ -34,6 +26,14 @@ import { BrowserRouter, Redirect, Switch } from 'react-router-dom'
 import './styles/reduction.css'
 
 import HomePage from 'pages/HomePage'
+
+import CreateAccountPage from 'pages/accounts/CreateAccountPage'
+import StakePage from 'pages/accounts/StakePage'
+import RammarketPage from 'pages/accounts/RammarketPage'
+import RefundPage from 'pages/accounts/RefundPage'
+
+import TransferPage from 'pages/TransferPage'
+import NameBidPage from 'pages/NameBidPage'
 
 const getBasename = () => {
   return `/${process.env.PUBLIC_URL.split('/').pop()}`
