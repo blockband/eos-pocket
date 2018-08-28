@@ -103,6 +103,9 @@ class Header extends React.Component {
     const { isNotificationConfirmed } = this.state
     const { accountStore } = this.props
 
+    const accountName = accountStore.loginAccountInfo ? accountStore.loginAccountInfo.account_name : 'Login'
+    const balance = accountStore.eosBalance + ' EOS'
+
     return (
       <Navbar light expand className={bem.b('bg-white')}>
         <Nav navbar className="mr-2">
@@ -137,15 +140,15 @@ class Header extends React.Component {
           )}
 
           <NavItem>
-            <NavLink id="Popover2">
-              {accountStore.isLogin ? (
+            {accountStore.isLogin ? (
+              <NavLink id="Popover2">
                 <Avatar onClick={this.toggleUserCardPopover} className="can-click" />
-              ) : (
-                <a href="#!" onClick={this.onLoginClick}>
-                  login with scatter
-                </a>
-              )}
-            </NavLink>
+              </NavLink>
+            ) : (
+              <NavLink id="Popover2" onClick={this.onLoginClick}>
+                login with scatter
+              </NavLink>
+            )}
             <Popover
               placement="bottom-end"
               isOpen={this.state.isOpenUserCardPopover}
@@ -155,7 +158,7 @@ class Header extends React.Component {
               style={{ minWidth: 250 }}
             >
               <PopoverBody className="p-0 border-light">
-                <UserCard title="Jane" subtitle="jane@jane.com" text="Last updated 3 mins ago" className="border-light">
+                <UserCard title={accountName} subtitle={balance} className="border-light">
                   <ListGroup flush>
                     <ListGroupItem tag="button" action className="border-light">
                       <MdPersonPin /> Profile

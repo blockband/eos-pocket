@@ -10,7 +10,19 @@ class CreateAccountPage extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {}
+    this.state = {
+      cpuStake: 0.1,
+      netStake: 0.1,
+      buyRam: 4096
+    }
+  }
+
+  handleChange = event => {
+    let obj = {}
+
+    obj[event.target.name] = event.target.value
+
+    this.setState(obj)
   }
 
   onCreateAccountClick = async () => {}
@@ -61,7 +73,13 @@ class CreateAccountPage extends Component {
                       Cpu Stake(in EOS)
                     </Label>
                     <Col sm={10}>
-                      <Input type="text" name="cpuStake" value="0.1" placeholder="CPU stake in EOS." />
+                      <Input
+                        type="text"
+                        name="cpuStake"
+                        value={this.state.cpuStake}
+                        placeholder="CPU stake in EOS."
+                        onChange={this.handleChange.bind(this)}
+                      />
                     </Col>
                   </FormGroup>
                   <FormGroup row>
@@ -69,7 +87,13 @@ class CreateAccountPage extends Component {
                       Net Stake(in EOS)
                     </Label>
                     <Col sm={10}>
-                      <Input type="text" name="netStake" value="0.1" placeholder="NET stake in EOS." />
+                      <Input
+                        type="text"
+                        name="netStake"
+                        value={this.state.netStake}
+                        placeholder="NET stake in EOS."
+                        onChange={this.handleChange.bind(this)}
+                      />
                     </Col>
                   </FormGroup>
                   <FormGroup row>
@@ -77,7 +101,13 @@ class CreateAccountPage extends Component {
                       Ram Buy(in bytes)
                     </Label>
                     <Col sm={10}>
-                      <Input type="text" name="ramBytes" value="4096" placeholder="Ram buy in bytes" />
+                      <Input
+                        type="text"
+                        name="ramBytes"
+                        value={this.state.buyRam}
+                        placeholder="Ram buy in bytes"
+                        onChange={this.handleChange.bind(this)}
+                      />
                     </Col>
                   </FormGroup>
                 </Form>

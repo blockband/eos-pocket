@@ -15,7 +15,7 @@ class EosAgent {
     this.scatter = null
     this._initialized = false
     this.identity = null
-    this.loginAccount = null
+    this.scatterAccount = null
 
     this.eos = Eos({
       httpEndpoint: ENDPOINT,
@@ -46,7 +46,7 @@ class EosAgent {
       console.log('Possible identity', this.scatter.identity)
       const loginAccount = this.scatter.identity.accounts.find(acc => acc.blockchain === Values.NETWORK.blockchain)
 
-      this.loginAccount = loginAccount
+      this.scatterAccount = loginAccount
       this.identity = id
 
       this.eos = this.scatter.eos(Values.NETWORK, Eos, Values.CONFIG)
@@ -83,8 +83,32 @@ class EosAgent {
     console.log('logout : ' + res)
   }
 
+  getScatterAccount = () => {
+    return this.scatterAccount
+  }
+
   getInfo = () => {
     return this.eos.getInfo({})
+  }
+
+  getAccount = async accountName => {
+    if (!this.eos) {
+      return
+    }
+
+    let account = await this.eos.getAccount({ account_name: accountName })
+
+    return account
+  }
+
+  getCurrencyBalance = async query => {
+    if (!this.eos) {
+      return
+    }
+
+    let balance = await this.eos.getCurrencyBalance(query)
+
+    return balance
   }
 }
 
