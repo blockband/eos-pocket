@@ -6,13 +6,16 @@ class AccountStore {
   account = null
 
   login = async () => {
-    let account = await eosAgent.loginWithScatter()
+    let result = await eosAgent.loginWithScatter()
 
-    if (account) {
-      this.account = account
+    if (result) {
       this.isLogin = true
 
       this.loadAccountInfo()
+
+      return true
+    } else {
+      return false
     }
   }
 

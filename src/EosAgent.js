@@ -50,12 +50,14 @@ class EosAgent {
       this.identity = id
 
       this.eos = this.scatter.eos(Values.NETWORK, Eos, Values.CONFIG)
+
+      return true
     }
   }
 
   loginWithScatter = async () => {
     if (!this.scatter) {
-      return
+      return false
     }
 
     let id = await this.scatter.getIdentity(Values.requiredFields)

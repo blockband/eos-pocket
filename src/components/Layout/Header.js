@@ -1,6 +1,8 @@
-import React from 'react';
+import React from 'react'
+import { inject, observer } from 'mobx-react'
+import { compose } from 'recompose'
 
-import bn from 'utils/bemnames';
+import bn from 'utils/bemnames'
 
 import {
   Navbar,
@@ -12,8 +14,8 @@ import {
   PopoverBody,
   ListGroup,
   ListGroupItem,
-  Button,
-} from 'reactstrap';
+  Button
+} from 'reactstrap'
 
 import {
   MdNotificationsActive,
@@ -24,19 +26,19 @@ import {
   MdSettingsApplications,
   MdHelp,
   MdClearAll,
-  MdExitToApp,
-} from 'react-icons/lib/md';
+  MdExitToApp
+} from 'react-icons/lib/md'
 
-import Avatar from 'components/Avatar';
-import { UserCard } from 'components/Card';
-import Notifications from 'components/Notifications';
-import SearchInput from 'components/SearchInput';
+import Avatar from 'components/Avatar'
+import { UserCard } from 'components/Card'
+import Notifications from 'components/Notifications'
+import SearchInput from 'components/SearchInput'
 
-import withBadge from 'hocs/withBadge';
+import withBadge from 'hocs/withBadge'
 
-import { notificationsData } from 'demos/header';
+import { notificationsData } from 'demos/header'
 
-const bem = bn.create('header');
+const bem = bn.create('header')
 
 const MdNotificationsActiveWithBadge = withBadge({
   size: 'md',
@@ -46,43 +48,60 @@ const MdNotificationsActiveWithBadge = withBadge({
     right: -10,
     display: 'inline-flex',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
-  children: <small>5</small>,
-})(MdNotificationsActive);
+  children: <small>5</small>
+})(MdNotificationsActive)
 
 class Header extends React.Component {
   state = {
     isOpenNotificationPopover: false,
     isNotificationConfirmed: false,
-    isOpenUserCardPopover: false,
-  };
+    isOpenUserCardPopover: false
+  }
 
   toggleNotificationPopover = () => {
     this.setState({
-      isOpenNotificationPopover: !this.state.isOpenNotificationPopover,
-    });
+      isOpenNotificationPopover: !this.state.isOpenNotificationPopover
+    })
 
     if (!this.state.isNotificationConfirmed) {
-      this.setState({ isNotificationConfirmed: true });
+      this.setState({ isNotificationConfirmed: true })
     }
-  };
+  }
 
   toggleUserCardPopover = () => {
     this.setState({
-      isOpenUserCardPopover: !this.state.isOpenUserCardPopover,
-    });
-  };
+      isOpenUserCardPopover: !this.state.isOpenUserCardPopover
+    })
+  }
 
   handleSidebarControlButton = event => {
-    event.preventDefault();
-    event.stopPropagation();
+    event.preventDefault()
+    event.stopPropagation()
 
-    document.querySelector('.cr-sidebar').classList.toggle('cr-sidebar--open');
-  };
+    document.querySelector('.cr-sidebar').classList.toggle('cr-sidebar--open')
+  }
+
+  onLoginClick = async () => {
+    try {
+      const { accountStore } = this.props
+
+      const result = await accountStore.login()
+
+      if (!result) {
+        alert('need install scatter')
+      }
+    } catch (e) {
+      // todo - error handle
+      // 423 Locked
+      console.log(e)
+    }
+  }
 
   render() {
-    const { isNotificationConfirmed } = this.state;
+    const { isNotificationConfirmed } = this.state
+    const { accountStore } = this.props
 
     return (
       <Navbar light expand className={bem.b('bg-white')}>
@@ -96,39 +115,36 @@ class Header extends React.Component {
         </Nav>
 
         <Nav navbar className={bem.e('nav-right')}>
-          <NavItem className="d-inline-flex">
-            <NavLink id="Popover1" className="position-relative">
-              {isNotificationConfirmed ? (
-                <MdNotificationsNone
-                  size={25}
-                  className="text-secondary can-click"
-                  onClick={this.toggleNotificationPopover}
-                />
-              ) : (
-                <MdNotificationsActiveWithBadge
-                  size={25}
-                  className="text-secondary can-click animated swing infinite"
-                  onClick={this.toggleNotificationPopover}
-                />
-              )}
-            </NavLink>
-            <Popover
-              placement="bottom"
-              isOpen={this.state.isOpenNotificationPopover}
-              toggle={this.toggleNotificationPopover}
-              target="Popover1">
-              <PopoverBody>
-                <Notifications notificationsData={notificationsData} />
-              </PopoverBody>
-            </Popover>
-          </NavItem>
+          {accountStore.isLogin && (
+            <NavItem className="d-inline-flex">
+              <NavLink id="Popover1" className="position-relative">
+                {isNotificationConfirmed ? (
+                  <MdNotificationsNone size={25} className="text-secondary can-click" onClick={this.toggleNotificationPopover} />
+                ) : (
+                  <MdNotificationsActiveWithBadge
+                    size={25}
+                    className="text-secondary can-click animated swing infinite"
+                    onClick={this.toggleNotificationPopover}
+                  />
+                )}
+              </NavLink>
+              <Popover placement="bottom" isOpen={this.state.isOpenNotificationPopover} toggle={this.toggleNotificationPopover} target="Popover1">
+                <PopoverBody>
+                  <Notifications notificationsData={notificationsData} />
+                </PopoverBody>
+              </Popover>
+            </NavItem>
+          )}
 
           <NavItem>
             <NavLink id="Popover2">
-              <Avatar
-                onClick={this.toggleUserCardPopover}
-                className="can-click"
-              />
+              {accountStore.isLogin ? (
+                <Avatar onClick={this.toggleUserCardPopover} className="can-click" />
+              ) : (
+                <a href="#!" onClick={this.onLoginClick}>
+                  login with scatter
+                </a>
+              )}
             </NavLink>
             <Popover
               placement="bottom-end"
@@ -136,13 +152,10 @@ class Header extends React.Component {
               toggle={this.toggleUserCardPopover}
               target="Popover2"
               className="p-0 border-0"
-              style={{ minWidth: 250 }}>
+              style={{ minWidth: 250 }}
+            >
               <PopoverBody className="p-0 border-light">
-                <UserCard
-                  title="Jane"
-                  subtitle="jane@jane.com"
-                  text="Last updated 3 mins ago"
-                  className="border-light">
+                <UserCard title="Jane" subtitle="jane@jane.com" text="Last updated 3 mins ago" className="border-light">
                   <ListGroup flush>
                     <ListGroupItem tag="button" action className="border-light">
                       <MdPersonPin /> Profile
@@ -169,8 +182,11 @@ class Header extends React.Component {
           </NavItem>
         </Nav>
       </Navbar>
-    );
+    )
   }
 }
 
-export default Header;
+export default compose(
+  inject('accountStore'),
+  observer
+)(Header)
