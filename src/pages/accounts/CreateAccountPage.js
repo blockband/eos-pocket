@@ -9,7 +9,11 @@ import Page from 'components/Page'
 class CreateAccountPage extends Component {
   constructor(props) {
     super(props)
+
+    this.state = {}
   }
+
+  onCreateAccountClick = async () => {}
 
   render() {
     return (
@@ -79,7 +83,7 @@ class CreateAccountPage extends Component {
                 </Form>
               </CardBody>
               <CardBody className="text-center">
-                <Button color="primary" size="sm">
+                <Button color="primary" size="sm" onClick={this.onCreateAccountClick}>
                   Create
                 </Button>
               </CardBody>

@@ -1,7 +1,5 @@
 import { decorate, observable, action } from 'mobx'
-import EosAgent from '../EosAgent'
-
-const eosAgent = new EosAgent()
+import eosAgent from '../EosAgent'
 
 class EosioStore {
   info = null
