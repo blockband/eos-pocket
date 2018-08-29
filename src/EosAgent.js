@@ -87,8 +87,32 @@ class EosAgent {
     return this.scatterAccount
   }
 
-  getInfo = () => {
+  getBlock = async blockNum => {
+    if (!this.eos) {
+      return
+    }
+
+    return await this.eos.getBlock(blockNum)
+  }
+
+  getInfo = async () => {
     return this.eos.getInfo({})
+  }
+
+  /**
+   * query = {
+      json: true,
+      code: 'code',
+      scope: 'scope',
+      table: 'table name'
+    }
+   */
+  getTableRows = async query => {
+    if (!this.eos) {
+      return
+    }
+
+    return await this.eos.getTableRows(query)
   }
 
   getAccount = async accountName => {
@@ -96,9 +120,15 @@ class EosAgent {
       return
     }
 
-    let account = await this.eos.getAccount({ account_name: accountName })
+    return await this.eos.getAccount({ account_name: accountName })
+  }
 
-    return account
+  getKeyAccounts = async publicKey => {
+    if (!this.eos) {
+      return
+    }
+
+    return await this.eos.getKeyAccounts({ public_key: publicKey })
   }
 
   getCurrencyBalance = async query => {
@@ -106,9 +136,77 @@ class EosAgent {
       return
     }
 
-    let balance = await this.eos.getCurrencyBalance(query)
+    return await this.eos.getCurrencyBalance(query)
+  }
 
-    return balance
+  getCurrencyStats = async query => {
+    if (!this.eos) {
+      return
+    }
+
+    return await this.eos.getCurrencyStats(query)
+  }
+
+  getActions = async (account_name, pos, offset) => {
+    if (!this.eos) {
+      return
+    }
+
+    return await this.eos.getActions({
+      account_name,
+      pos,
+      offset
+    })
+  }
+
+  /**
+   * isProxy :
+   * 1 : proxy
+   * 0 : unproxy
+   */
+  regproxy = async (accountName, isProxy) => {
+    if (!this.eos) {
+      return
+    }
+
+    return await this.eos.regproxy({
+      proxy: accountName,
+      isproxy: isProxy
+    })
+  }
+
+  voteProducer = async (account, producers = [], proxy = '') => {
+    if (!this.eos) {
+      return
+    }
+
+    return await this.eos.voteproducer(account, proxy, producers)
+  }
+
+  refund = async owner => {
+    if (!this.eos) {
+      return
+    }
+
+    return await this.eos.refund({
+      owner
+    })
+  }
+
+  createTransaction = async cb => {
+    if (!this.eos) {
+      return
+    }
+
+    return await this.eos.transaction(cb)
+  }
+
+  createTransactionWithContract = async (contract, cb) => {
+    if (!this.eos) {
+      return
+    }
+
+    return await this.eos.transaction(contract, cb)
   }
 }
 

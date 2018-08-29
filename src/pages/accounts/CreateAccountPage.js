@@ -27,7 +27,8 @@ class CreateAccountPage extends Component {
       privateKey: '',
       publicKey: '',
       copiedPrivateKey: false,
-      copiedPublicKey: false
+      copiedPublicKey: false,
+      isTransfer: false
     }
   }
 
@@ -96,6 +97,24 @@ class CreateAccountPage extends Component {
       // todo invalid error msg
       return
     }
+
+    const data = {
+      creator: {
+        name: '',
+        authority: ''
+      },
+      accountName: this.state.accountName,
+      ownerPubKey: this.state.ownerKey,
+      activePubKey: this.state.activeKey,
+      cpuStake: this.state.cpuStake,
+      netStake: this.state.netStake,
+      ramPurchase: this.state.buyRam,
+      isTransfer: this.state.isTransfer ? 1 : 0
+    }
+
+    const { eosioStore } = this.props
+
+    const result = await eosioStore.createNewAccount(data)
   }
 
   render() {
@@ -222,6 +241,14 @@ class CreateAccountPage extends Component {
                         placeholder="Ram buy in bytes"
                         onChange={this.handleChange.bind(this)}
                       />
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="isTransfer" sm={2}>
+                      Transfer EOS
+                    </Label>
+                    <Col sm={10}>
+                      <Input type="checkbox" name="isTransfer" value={this.state.isTransfer} onChange={this.handleChange.bind(this)} />
                     </Col>
                   </FormGroup>
                 </Form>
