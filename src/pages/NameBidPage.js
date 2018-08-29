@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Row, Col, Card, CardHeader, CardBody, Button, Form, FormGroup, Label, Input } from 'reactstrap'
 
 import Page from 'components/Page'
+import AccountResource from 'components/Resource/AccountResource'
 
 class NameBidPage extends Component {
   constructor(props) {
@@ -11,14 +12,7 @@ class NameBidPage extends Component {
   render() {
     return (
       <Page className="ButtonPage" title="Name bid" breadcrumbs={[{ name: 'Name bid', active: true }]}>
-        <Row>
-          <Col xs="12">
-            <Card className="mb-3">
-              <CardHeader>Available EOS</CardHeader>
-              <CardBody className="text-center">0.1454 EOS</CardBody>
-            </Card>
-          </Col>
-        </Row>
+        <AccountResource />
         <Row>
           <Col xs="12">
             <Card className="mb-3">

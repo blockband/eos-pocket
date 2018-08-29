@@ -161,19 +161,13 @@ class Header extends React.Component {
                 <UserCard title={accountName} subtitle={balance} className="border-light">
                   <ListGroup flush>
                     <ListGroupItem tag="button" action className="border-light">
-                      <MdPersonPin /> Profile
+                      <MdPersonPin /> Cpu usage
                     </ListGroupItem>
                     <ListGroupItem tag="button" action className="border-light">
-                      <MdInsertChart /> Stats
+                      <MdInsertChart /> Net usage
                     </ListGroupItem>
                     <ListGroupItem tag="button" action className="border-light">
-                      <MdMessage /> Messages
-                    </ListGroupItem>
-                    <ListGroupItem tag="button" action className="border-light">
-                      <MdSettingsApplications /> Settings
-                    </ListGroupItem>
-                    <ListGroupItem tag="button" action className="border-light">
-                      <MdHelp /> Help
+                      <MdMessage /> Ram usage
                     </ListGroupItem>
                     <ListGroupItem tag="button" action className="border-light">
                       <MdExitToApp /> Signout

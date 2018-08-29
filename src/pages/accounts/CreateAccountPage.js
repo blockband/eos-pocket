@@ -5,6 +5,7 @@ import { compose } from 'recompose'
 import { Row, Col, Card, CardHeader, CardBody, Badge, Button, Form, FormGroup, Label, Input } from 'reactstrap'
 
 import Page from 'components/Page'
+import AccountResource from 'components/Resource/AccountResource'
 
 class CreateAccountPage extends Component {
   constructor(props) {
@@ -30,14 +31,7 @@ class CreateAccountPage extends Component {
   render() {
     return (
       <Page className="ButtonPage" title="Create Account" breadcrumbs={[{ name: 'Account', active: true }]}>
-        <Row>
-          <Col xs="12">
-            <Card className="mb-3">
-              <CardHeader>Available EOS</CardHeader>
-              <CardBody className="text-center">0.1454 EOS</CardBody>
-            </Card>
-          </Col>
-        </Row>
+        <AccountResource />
         <Row>
           <Col xs="12">
             <Card className="mb-3">

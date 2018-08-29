@@ -13,6 +13,7 @@ class AccountStore {
   cpuStaked = 0.0
   netStaked = 0.0
   staked = 0
+  ram = 0
   permissions = null
   myVoteProducers = []
   isProxy = 0
