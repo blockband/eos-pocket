@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { inject, observer } from 'mobx-react'
 import { compose } from 'recompose'
+import ecc from 'eosjs-ecc'
 
 import { Row, Col, Card, CardHeader, CardBody, Badge, Button, Form, FormGroup, Label, Input } from 'reactstrap'
 
@@ -14,7 +15,38 @@ class CreateAccountPage extends Component {
     this.state = {
       cpuStake: 0.1,
       netStake: 0.1,
-      buyRam: 4096
+      buyRam: 4096,
+      privateKey: '',
+      publicKey: '',
+      copiedPrivateKey: false,
+      copiedPublicKey: false
+    }
+  }
+
+  onGenerateKeyClick = async () => {
+    const privateKeyPair = await this.genKeyPair()
+
+    this.setState({
+      privateKey: privateKeyPair.privateKey,
+      publicKey: privateKeyPair.publicKey
+    })
+  }
+
+  genKeyPair = async () => {
+    const privateKey = await ecc.randomKey()
+
+    if (privateKey) {
+      const publicKey = ecc.privateToPublic(privateKey)
+
+      return {
+        privateKey,
+        publicKey
+      }
+    }
+
+    return {
+      privateKey: '',
+      publicKey: ''
     }
   }
 
@@ -32,6 +64,38 @@ class CreateAccountPage extends Component {
     return (
       <Page className="ButtonPage" title="Create Account" breadcrumbs={[{ name: 'Account', active: true }]}>
         <AccountResource />
+        <Row>
+          <Col xs="12">
+            <Card className="mb-3">
+              <CardHeader>Generate Key</CardHeader>
+              <CardBody>
+                <Form>
+                  <FormGroup row>
+                    <Label for="privateKey" sm={2}>
+                      Private key
+                    </Label>
+                    <Col sm={10}>
+                      <Input type="text" name="privateKey" placeholder="Private key" value={this.state.privateKey} disabled={true} />
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Label for="publicKey" sm={2}>
+                      Public key
+                    </Label>
+                    <Col sm={10}>
+                      <Input type="text" name="publicKey" placeholder="Public key" value={this.state.publicKey} disabled={true} />
+                    </Col>
+                  </FormGroup>
+                </Form>
+              </CardBody>
+              <CardBody className="text-center">
+                <Button color="primary" size="sm" onClick={this.onGenerateKeyClick}>
+                  Generate
+                </Button>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
         <Row>
           <Col xs="12">
             <Card className="mb-3">
