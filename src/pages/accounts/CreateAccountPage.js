@@ -8,11 +8,19 @@ import { Row, Col, Card, CardHeader, CardBody, Badge, Button, Form, FormGroup, L
 import Page from 'components/Page'
 import AccountResource from 'components/Resource/AccountResource'
 
+const ACCOUNT_PATTERN = /^[a-z1-5]{12}$/g
+const MIN_CPU_STAKE_IN_EOS = 0.1
+const MIN_NET_STAKE_IN_EOS = 0.1
+const MIN_RAM_BUYING_IN_BYTES = 3096
+
 class CreateAccountPage extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
+      accountName: '',
+      ownerKey: '',
+      activeKey: '',
       cpuStake: 0.1,
       netStake: 0.1,
       buyRam: 4096,
@@ -58,7 +66,37 @@ class CreateAccountPage extends Component {
     this.setState(obj)
   }
 
-  onCreateAccountClick = async () => {}
+  onCreateAccountClick = async () => {
+    if (!ACCOUNT_PATTERN.test(this.state.accountName)) {
+      // todo invalid error msg
+      return
+    }
+
+    if (!ecc.isValidPublic(this.state.ownerKey)) {
+      // todo invalid error msg
+      return
+    }
+
+    if (!ecc.isValidPublic(this.state.activeKey)) {
+      // todo invalid error msg
+      return
+    }
+
+    if (this.state.cpuStake < MIN_CPU_STAKE_IN_EOS) {
+      // todo invalid error msg
+      return
+    }
+
+    if (this.state.netStake < MIN_NET_STAKE_IN_EOS) {
+      // todo invalid error msg
+      return
+    }
+
+    if (this.state.buyRam < MIN_RAM_BUYING_IN_BYTES) {
+      // todo invalid error msg
+      return
+    }
+  }
 
   render() {
     return (
@@ -107,7 +145,13 @@ class CreateAccountPage extends Component {
                       Account Name
                     </Label>
                     <Col sm={10}>
-                      <Input type="text" name="accountName" placeholder="12 characters, a-z, 1-5" />
+                      <Input
+                        type="text"
+                        name="accountName"
+                        value={this.state.accountName}
+                        placeholder="12 characters, a-z, 1-5"
+                        onChange={this.handleChange.bind(this)}
+                      />
                     </Col>
                   </FormGroup>
                   <FormGroup row>
@@ -115,7 +159,13 @@ class CreateAccountPage extends Component {
                       Owner Public Key
                     </Label>
                     <Col sm={10}>
-                      <Input type="text" name="ownerKey" placeholder="Owner public key is required." />
+                      <Input
+                        type="text"
+                        name="ownerKey"
+                        value={this.state.ownerKey}
+                        placeholder="Owner public key is required."
+                        onChange={this.handleChange.bind(this)}
+                      />
                     </Col>
                   </FormGroup>
                   <FormGroup row>
@@ -123,7 +173,13 @@ class CreateAccountPage extends Component {
                       Active Public Key
                     </Label>
                     <Col sm={10}>
-                      <Input type="text" name="activeKey" placeholder="Active public key is required." />
+                      <Input
+                        type="text"
+                        name="activeKey"
+                        value={this.state.activeKey}
+                        placeholder="Active public key is required."
+                        onChange={this.handleChange.bind(this)}
+                      />
                     </Col>
                   </FormGroup>
                   <FormGroup row>
