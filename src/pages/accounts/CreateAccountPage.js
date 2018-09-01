@@ -3,7 +3,19 @@ import { inject, observer } from 'mobx-react'
 import { compose } from 'recompose'
 import ecc from 'eosjs-ecc'
 
-import { Row, Col, Card, CardHeader, CardBody, Badge, Button, Form, FormGroup, Label, Input } from 'reactstrap'
+import {
+  Row,
+  Col,
+  Card,
+  CardHeader,
+  CardBody,
+  Badge,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input
+} from 'reactstrap'
 
 import Page from 'components/Page'
 import AccountResource from 'components/Resource/AccountResource'
@@ -98,10 +110,12 @@ class CreateAccountPage extends Component {
       return
     }
 
+    const { accountStore } = this.props
+
     const data = {
       creator: {
-        name: '',
-        authority: ''
+        name: accountStore.loginAccountInfo.account_name,
+        authority: accountStore.permissions[0].perm_name
       },
       accountName: this.state.accountName,
       ownerPubKey: this.state.ownerKey,
@@ -119,7 +133,11 @@ class CreateAccountPage extends Component {
 
   render() {
     return (
-      <Page className="ButtonPage" title="Create Account" breadcrumbs={[{ name: 'Account', active: true }]}>
+      <Page
+        className="ButtonPage"
+        title="Create Account"
+        breadcrumbs={[{ name: 'Account', active: true }]}
+      >
         <AccountResource />
         <Row>
           <Col xs="12">
@@ -132,7 +150,13 @@ class CreateAccountPage extends Component {
                       Private key
                     </Label>
                     <Col sm={10}>
-                      <Input type="text" name="privateKey" placeholder="Private key" value={this.state.privateKey} disabled={true} />
+                      <Input
+                        type="text"
+                        name="privateKey"
+                        placeholder="Private key"
+                        value={this.state.privateKey}
+                        disabled={true}
+                      />
                     </Col>
                   </FormGroup>
                   <FormGroup row>
@@ -140,7 +164,13 @@ class CreateAccountPage extends Component {
                       Public key
                     </Label>
                     <Col sm={10}>
-                      <Input type="text" name="publicKey" placeholder="Public key" value={this.state.publicKey} disabled={true} />
+                      <Input
+                        type="text"
+                        name="publicKey"
+                        placeholder="Public key"
+                        value={this.state.publicKey}
+                        disabled={true}
+                      />
                     </Col>
                   </FormGroup>
                 </Form>
@@ -248,7 +278,12 @@ class CreateAccountPage extends Component {
                       Transfer EOS
                     </Label>
                     <Col sm={10}>
-                      <Input type="checkbox" name="isTransfer" value={this.state.isTransfer} onChange={this.handleChange.bind(this)} />
+                      <Input
+                        type="checkbox"
+                        name="isTransfer"
+                        value={this.state.isTransfer}
+                        onChange={this.handleChange.bind(this)}
+                      />
                     </Col>
                   </FormGroup>
                 </Form>
@@ -267,6 +302,6 @@ class CreateAccountPage extends Component {
 }
 
 export default compose(
-  inject('eosioStore'),
+  inject('eosioStore', 'accountStore'),
   observer
 )(CreateAccountPage)
