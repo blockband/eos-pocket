@@ -108,7 +108,8 @@ decorate(EosioStore, {
   info: observable,
   ramInfo: observable,
   ramPrice: observable,
-  getInfo: action
+  getInfo: action,
+  getRamInfo: action
 })
 
 export default EosioStore
